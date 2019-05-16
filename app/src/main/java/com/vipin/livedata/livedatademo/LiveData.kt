@@ -38,7 +38,7 @@ class LiveData<T> {
 
     fun removeObserver(observer: (T?) -> Unit) {
         val lifecycleObserver = mObservers.remove(observer)
-        lifecycleObserver?.let { lifecycleObserver.owner.lifecycle.removeObserver(it) }
+        lifecycleObserver?.let(lifecycleObserver.owner.lifecycle::removeObserver)
     }
 
     private inner class LiveDataLifeCycleObserver(val owner: LifecycleOwner, val observer: (T?) -> Unit) : LifecycleObserver {
